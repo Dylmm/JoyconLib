@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JoyconDemo : MonoBehaviour {
-	
+	private Joycon j;
 	private List<Joycon> joycons;
 
-    // Values made available via Unity
-    public float[] stick;
+	// Values made available via Unity
+	public float[] stick;
     public Vector3 gyro;
     public Vector3 accel;
     public int jc_ind = 0;
     public Quaternion orientation;
 
-    void Start ()
+	public enum JoyType { left, right };
+	public JoyType handedness;
+
+	void Start ()
     {
         gyro = new Vector3(0, 0, 0);
         accel = new Vector3(0, 0, 0);
@@ -22,6 +25,15 @@ public class JoyconDemo : MonoBehaviour {
 		if (joycons.Count < jc_ind+1){
 			Destroy(gameObject);
 		}
+
+		// initialize and get joycon data
+		j = joycons[jc_ind];
+
+		if (j.isLeft)
+			handedness = JoyType.left;
+		else
+			handedness = JoyType.right;
+
 	}
 
     // Update is called once per frame
