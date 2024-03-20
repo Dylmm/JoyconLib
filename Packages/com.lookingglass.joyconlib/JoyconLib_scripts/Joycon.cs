@@ -244,7 +244,12 @@ public class Joycon
             return Quaternion.identity;
         }
     }
-	public int Attach(byte leds_ = 0x0)
+    public byte[] GetColor()
+    {
+        byte[] colors = ReadSPI(0x60, (0x50), 6); // get controllercolor 3 bytes and buttoncolor 3 bytes if possible;
+        return colors;
+    }
+    public int Attach(byte leds_ = 0x0)
     {
         state = state_.ATTACHED;
         byte[] a = { 0x0 };
@@ -374,7 +379,7 @@ public class Joycon
                 }
                 ts_de = report_buf[1];
                 DebugPrint(string.Format("Dequeue. Queue length: {0:d}. Packet ID: {1:X2}. Timestamp: {2:X2}. Lag to dequeue: {3:s}. Lag between packets (expect 15ms): {4:s}",
-                    reports.Count, report_buf[0], report_buf[1], System.DateTime.Now.Subtract(rep.GetTime()), rep.GetTime().Subtract(ts_prev)), DebugType.THREADING);
+                reports.Count, report_buf[0], report_buf[1], System.DateTime.Now.Subtract(rep.GetTime()), rep.GetTime().Subtract(ts_prev)), DebugType.THREADING);
                 ts_prev = rep.GetTime();
             }
             ProcessButtonsAndStick(report_buf);

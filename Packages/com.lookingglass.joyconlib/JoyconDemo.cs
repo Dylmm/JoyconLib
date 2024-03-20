@@ -13,6 +13,9 @@ public class JoyconDemo : MonoBehaviour {
     public int jc_ind = 0;
     public Quaternion orientation;
 
+	public Color32 BodyColor;
+	public Color32 BodyAccentColor;
+
 	public enum JoyType { left, right };
 	public JoyType handedness;
 
@@ -29,6 +32,12 @@ public class JoyconDemo : MonoBehaviour {
 		// initialize and get joycon data
 		j = joycons[jc_ind];
 
+		// get joycon body and button colors
+		var a = j.GetColor();
+		BodyColor = new Color32(a[0], a[1], a[2], 255);
+		BodyAccentColor = new Color32(a[3], a[4], a[5], 255);
+
+		//get joycon left or right hand
 		if (j.isLeft)
 			handedness = JoyType.left;
 		else
