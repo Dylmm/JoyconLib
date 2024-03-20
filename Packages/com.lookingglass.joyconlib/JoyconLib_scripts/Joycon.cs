@@ -249,6 +249,12 @@ public class Joycon
         byte[] colors = ReadSPI(0x60, (0x50), 6); // get controllercolor 3 bytes and buttoncolor 3 bytes if possible;
         return colors;
     }
+    public int GetVoltage()
+    {
+        var a = Subcommand(0x50, new byte[] { 0x0 }, 0, false)[2];
+        int power = int.Parse(a.ToString("X")[0].ToString()) * 10;
+        return power;
+    }
     public int Attach(byte leds_ = 0x0)
     {
         state = state_.ATTACHED;

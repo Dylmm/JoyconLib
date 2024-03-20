@@ -19,6 +19,8 @@ public class JoyconDemo : MonoBehaviour {
 	public enum JoyType { left, right };
 	public JoyType handedness;
 
+	public int voltage;
+
 	void Start ()
     {
         gyro = new Vector3(0, 0, 0);
@@ -43,10 +45,13 @@ public class JoyconDemo : MonoBehaviour {
 		else
 			handedness = JoyType.right;
 
+		voltage = j.GetVoltage();
+		Debug.Log($"{handedness} voltage: {j.GetVoltage()}");
+
 	}
 
-    // Update is called once per frame
-    void Update () {
+	// Update is called once per frame
+	void Update () {
 		// make sure the Joycon only gets checked if attached
 		if (joycons.Count > 0)
         {
