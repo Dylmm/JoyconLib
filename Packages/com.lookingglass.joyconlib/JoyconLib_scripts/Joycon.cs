@@ -428,6 +428,7 @@ public class Joycon
             buttons[(int)Button.DPAD_UP] = (report_buf[3 + (isLeft ? 2 : 0)] & (isLeft ? 0x02 : 0x02)) != 0;
             buttons[(int)Button.DPAD_LEFT] = (report_buf[3 + (isLeft ? 2 : 0)] & (isLeft ? 0x08 : 0x01)) != 0;
             buttons[(int)Button.HOME] = ((report_buf[4] & 0x10) != 0);
+            buttons[(int)Button.CAPTURE] = ((report_buf[4] & 0x20) != 0);
             buttons[(int)Button.MINUS] = ((report_buf[4] & 0x01) != 0);
             buttons[(int)Button.PLUS] = ((report_buf[4] & 0x02) != 0);
             buttons[(int)Button.STICK] = ((report_buf[4] & (isLeft ? 0x08 : 0x04)) != 0);
