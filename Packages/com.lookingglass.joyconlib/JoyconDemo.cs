@@ -38,6 +38,8 @@ public class JoyconDemo : MonoBehaviour {
 		var a = j.GetColor();
 		BodyColor = new Color32(a[0], a[1], a[2], 255);
 		BodyAccentColor = new Color32(a[3], a[4], a[5], 255);
+		GetComponent<Renderer>().material.color = BodyColor;
+		gameObject.transform.GetChild(0).GetComponent<Renderer>().material.color = BodyAccentColor;
 
 		//get joycon left or right hand
 		if (j.isLeft)
@@ -102,7 +104,8 @@ public class JoyconDemo : MonoBehaviour {
 			if (j.GetButton(Joycon.Button.DPAD_UP)){
 				gameObject.GetComponent<Renderer>().material.color = Color.red;
 			} else{
-				gameObject.GetComponent<Renderer>().material.color = Color.blue;
+				//gameObject.GetComponent<Renderer>().material.color = Color.blue;
+				GetComponent<Renderer>().material.color = BodyColor;
 			}
             gameObject.transform.rotation = orientation;
         }
